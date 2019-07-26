@@ -30,32 +30,39 @@ fun Date.add(value: Int, units: TimeUnits = TimeUnits.SECOND) : Date {
 fun Date.humanizeDiff(date: Date = Date()): String {
     date.time -= this.time
 
-    var result : String = when {
+    return when {
         date.time <= -360 * DAY -> "более чем через год"
-        date.time <= -26 * HOUR -> "через ${date.format("dd")} дней"
+        date.time <= -26 * HOUR -> "через ${TimeUnits.DAY.plural(-(date.time / DAY).toInt())}"
         date.time <= -22 * HOUR -> "через день"
-        date.time <= -75 * MINUTE -> "${date.format("HH")} часов"
+        date.time <= -75 * MINUTE -> "через ${TimeUnits.HOUR.plural(-(date.time / HOUR).toInt())}"
         date.time <= -45 * MINUTE -> "через час"
-        date.time <= -75 * SECOND -> "через ${date.format("mm")} минуты"
+        date.time <= -75 * SECOND -> "через ${TimeUnits.MINUTE.plural(-(date.time / MINUTE).toInt())}"
         date.time <= -45 * SECOND -> "через минуту"
         date.time <= -SECOND -> "через несколько секунд"
         date.time <= SECOND -> "только что"
         date.time <= 45 * SECOND -> "несколько секунд назад"
         date.time <= 75 * SECOND -> "минуту назад"
-        date.time <= 45 * MINUTE -> "${date.format("mm")} минуты назад"
+        date.time <= 45 * MINUTE -> "${TimeUnits.MINUTE.plural((date.time / MINUTE).toInt())} назад"
         date.time <= 75 * MINUTE -> "час назад"
-        date.time <= 22 * HOUR -> "${date.format("HH")} часов назад"
+        date.time <= 22 * HOUR -> "${TimeUnits.HOUR.plural((date.time / HOUR).toInt())} назад"
         date.time <= 26 * HOUR -> "день назад"
-        date.time <= 360 * DAY -> "${date.format("dd")} дней назад"
+        date.time <= 360 * DAY -> "${TimeUnits.DAY.plural((date.time / DAY).toInt())} назад"
         else -> "более года назад"
     }
-
-    return result
 }
 
 enum class TimeUnits {
     SECOND,
     MINUTE,
     HOUR,
-    DAY
+    DAY;
+
+    fun plural(value: Int): String {
+        return when (this) {
+            SECOND -> "$value секунд${if (value % 10 == 1 && value % 100 != 11) "у" else if (value % 10 in 2..4 && (value < 11 || value > 14)) "ы" else ""}"
+            MINUTE -> "$value минут${if (value % 10 == 1 && value % 100 != 11) "у" else if (value % 10 in 2..4 && (value < 11 || value > 14)) "ы" else ""}"
+            HOUR -> "$value час${if (value % 10 == 1 && value % 100 != 11) "" else if (value % 10 in 2..4 && (value < 11 || value > 14)) "а" else "ов"}"
+            DAY -> "$value ${if (value % 10 == 1 && value % 100 != 11) "день" else if (value % 10 in 2..4 && (value < 11 || value > 14)) "дня" else "дней"}"
+        }
+    }
 }
