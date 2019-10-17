@@ -25,6 +25,7 @@ class ProfileActivity : AppCompatActivity() {
     lateinit var viewFields: Map<String, TextView>
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        //TODO set custom theme this before super and set ContentView
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile)
         initViews(savedInstanceState)
@@ -66,7 +67,7 @@ class ProfileActivity : AppCompatActivity() {
                 "respect" to tv_respect
         )
 
-        isEditMode = savedInstanceState?.getBoolean(IS_EDIT_MODE, false) ?: false
+        isEditMode = savedInstanceState?.getBoolean(IS_EDIT_MODE) ?: false
         showCurrentMode(isEditMode)
 
         btn_edit.setOnClickListener {

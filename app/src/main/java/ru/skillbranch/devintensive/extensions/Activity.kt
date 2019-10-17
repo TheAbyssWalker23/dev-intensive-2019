@@ -9,7 +9,7 @@ import android.view.inputmethod.InputMethodManager
 import kotlin.math.roundToInt
 
 fun Activity.hideKeyboard() {
-    val inputManager : InputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+    val inputManager: InputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
     inputManager.hideSoftInputFromWindow(currentFocus?.windowToken, InputMethodManager.HIDE_NOT_ALWAYS)
 }
 
