@@ -46,7 +46,7 @@ object Utils {
                 'ц' to "c",
                 'ч' to "ch",
                 'ш' to "sh",
-                'щ' to "sh",
+                'щ' to "sh'",
                 'ъ' to "",
                 'ы' to "i",
                 'ь' to "",
@@ -61,7 +61,11 @@ object Utils {
                 .toCharArray()
                 .forEach {
                     val symbol = map[it.toLowerCase()]
-                    result += if (symbol.isNullOrEmpty()) it else if (it.isUpperCase()) symbol.capitalize() else symbol
+                    result += when {
+                        symbol == null -> it
+                        it.isUpperCase() -> symbol.capitalize()
+                        else -> symbol
+                    }
                 }
         return result
     }
