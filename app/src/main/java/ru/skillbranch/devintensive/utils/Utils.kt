@@ -1,6 +1,8 @@
 package ru.skillbranch.devintensive.utils
 
+import android.content.Context
 import java.util.*
+import kotlin.math.roundToInt
 
 object Utils {
     fun parseFullName(fullName: String?, divider: String = " "): Pair<String?, String?> {
@@ -83,5 +85,17 @@ object Utils {
             null -> if (last == null) null else "$last".toUpperCase()
             else -> if (last == null) "$first".toUpperCase() else "$first$last".toUpperCase()
         }
+    }
+
+    fun convertDpToPx(ctx: Context, dp: Float): Int {
+        return (dp * ctx.resources.displayMetrics.density).roundToInt()
+    }
+
+    fun convertPxToDp(ctx: Context, px: Int): Int {
+        return (px / ctx.resources.displayMetrics.density).roundToInt()
+    }
+
+    fun convertSpToPx(context: Context, sp: Int): Int {
+        return sp * context.resources.displayMetrics.scaledDensity.roundToInt()
     }
 }
