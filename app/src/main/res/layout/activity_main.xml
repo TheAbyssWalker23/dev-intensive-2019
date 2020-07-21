@@ -50,14 +50,14 @@
                 android:paddingTop="@dimen/spacing_normal_16"
                 android:paddingBottom="@dimen/spacing_normal_16"
                 android:layout_marginTop="@dimen/spacing_normal_16"
-                android:layout_marginBottom="@dimen/spacing_normal_16"/>
+                android:layout_marginBottom="@dimen/spacing_normal_16" />
 
         <ImageView
             android:id="@+id/iv_send"
             android:layout_width="@dimen/image_button"
             android:layout_height="@dimen/image_button"
             android:layout_gravity="center"
-            android:layout_marginRight="@dimen/spacing_normal_16"
+            android:layout_marginHorizontal="@dimen/spacing_normal_16"
             android:src="@drawable/ic_send_black_24dp" />
     </LinearLayout>
 </LinearLayout>
