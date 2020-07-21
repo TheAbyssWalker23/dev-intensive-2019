@@ -52,7 +52,7 @@ class ProfileActivity : AppCompatActivity() {
     }
 
     private fun updateTheme(mode: Int) {
-        delegate.setLocalNightMode(mode)
+        delegate.localNightMode = mode
     }
 
     private fun initViews(savedInstanceState: Bundle?) {
